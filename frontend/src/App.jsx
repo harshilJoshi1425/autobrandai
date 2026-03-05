@@ -84,7 +84,7 @@ function App() {
     setImageUrl(null);
     try {
       const response = await fetch(
-        "http://localhost:3000/generate-image",
+        "https://autobrandai-hb0t.onrender.com/generate-image",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
