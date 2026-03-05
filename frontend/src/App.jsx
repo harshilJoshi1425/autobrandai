@@ -79,6 +79,9 @@ function App() {
 
   const handleImageSubmit = async () => {
     if (!prompt.trim()) return;
+
+    console.log("Sending prompt:", prompt);
+    
     setLoading(true);
     setImgError(false);
     setImageUrl(null);
@@ -92,7 +95,11 @@ function App() {
         },
       );
 
-      if (!response.ok) throw new Error("Image generation failed");
+      if (!response.ok) {
+       const text = await response.text();
+       console.error("Backend error:", text);
+       throw new Error("Image generation failed");
+      }
 
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("image")) {
@@ -195,11 +202,8 @@ function App() {
           </motion.button>
 
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleImageSubmit}
-            className="submit-btn"
-            disabled={loading || !prompt.trim()}>
+           onClick={handleImageSubmit}
+            >
             {loading ? (
               <>
                 <Loader2 className="animate-spin" size={20} /> Generating...
