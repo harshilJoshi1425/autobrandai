@@ -10,12 +10,10 @@ const app = express();
 // Configure CORS to allow frontend access
 const corsOptions = {
   origin: [
-    "https://autobrandaifrontend.onrender.com",
-    "http://localhost:5173", // For local development
-    "http://localhost:4173", // For local preview
-  ],
-  credentials: true,
-  optionsSuccessStatus: 200,
+    "https://autobrandai.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:4173"
+  ]
 };
 
 app.use(cors(corsOptions));
